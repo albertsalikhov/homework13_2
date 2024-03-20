@@ -21,10 +21,15 @@ class Category:
         return products_str
 
     def __len__(self):
-        return len(self.__products)
+        general_products = 0
+        for prod in self.__products:
+            general_products += prod.quantity_stock
+        return general_products
+
+
 
     def __str__(self):
-        return f'{self.name}, количество продуктов: {len(self.__products)} шт.'
+        return f'{self.name}, количество продуктов: {len(self)} шт.'
 
 
 
@@ -72,4 +77,5 @@ if __name__ == '__main__':
     print(product1)
     print(category1)
     print(product1 + product2)
+    print(len(category1))
 
