@@ -3,8 +3,8 @@ class Category:
     total_number_of_unique_products = 0
 
     def __init__(self, name:str, description:str, products:list):
-        self.name = name # название
-        self.descriptions = description # описание
+        self.name = name # название категории
+        self.descriptions = description # описание категории
         self.__products = products  # список продуктов
         Category.total_number_of_categories += 1  # общее количество категорий
         Category.total_number_of_unique_products += len(self.__products)
@@ -14,11 +14,17 @@ class Category:
 
 
     @property
-    def print_products(self):
+    def products(self):
         products_str = []
         for product in self.__products:
             products_str.append( f'{product.name}, {product.price} руб. Остаток: {product.quantity_stock} шт.')
         return products_str
+
+    def __len__(self):
+        return len(self.__products)
+
+    def __str__(self):
+        return f'{self.name}, количество продуктов: {len(self.__products)} шт.'
 
 
 
@@ -45,6 +51,13 @@ class Product:
             print('Цена введена некорректная')
         self.price = price
 
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity_stock} шт.'
+
+    def __add__(self, other):
+        result = (self.price * self.quantity_stock) + (other.price * other.quantity_stock)
+        return result
+
 
 
 
@@ -54,6 +67,9 @@ if __name__ == '__main__':
     product2 = Product('телевизор', 'описание', 50000.00, 10)
     list_products = [product1, product2]
     category1 = Category('электроника', 'описание', list_products)
-    print(category1.print_products)
+    print(category1.products)
     print(Category.total_number_of_categories)
+    print(product1)
+    print(category1)
+    print(product1 + product2)
 
