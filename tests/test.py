@@ -10,8 +10,8 @@ def category():
 def test_category(category):
     assert category.name == 'электроника'
     assert category.descriptions == 'описание'
-    assert category.total_number_of_categories == 1
-    assert category.total_number_of_unique_products == 4
+    assert category.total_number_of_categories == 2
+    assert category.total_number_of_unique_products == 6
 
 @pytest.fixture()
 def prod():
