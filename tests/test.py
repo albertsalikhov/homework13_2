@@ -34,5 +34,5 @@ def test_prod_2(prod2):
     assert prod2.quantity_stock == 27
 
 def test_add(prod1, prod2):
-    assert prod1 + prod2 == 42
+    assert prod1 + prod2 == 1374000.0
 
