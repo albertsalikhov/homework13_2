@@ -10,7 +10,9 @@ class Category:
         Category.total_number_of_unique_products += len(self.__products) # количество уникальных продуктов
 
     def add_products(self, *args):
-        self.__products.append(args)
+        if isinstance(args, Product):
+            self.__products.append(args)
+        raise TypeError('Только Product и наследники Product')
 
 
     @property
@@ -66,7 +68,8 @@ class Product:
 
 
 class Smartphone(Product):
-    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color, performance, model, memory_capacity):
+    def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
+                 model:str,memory_capacity:str):
         super().__init__(name, descriptions, price, quantity_stock, color)
         self.performance = performance
         self.model = model
@@ -74,9 +77,10 @@ class Smartphone(Product):
 
 
 class LawnGrass(Product):
-    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color, manufacturer_country, germination_period):
+    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color:str, manuf_country:str,
+                 germination_period:str):
         super().__init__(name, descriptions, price, quantity_stock, color)
-        self.manufacturer_country = manufacturer_country
+        self.manuf_country = manuf_country
         self.germination_period = germination_period
 
 

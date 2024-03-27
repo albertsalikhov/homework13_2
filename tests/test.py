@@ -1,6 +1,7 @@
 import pytest
 
-from pythonProject.src.main import Category, Product
+from pythonProject.src.classes import Category, Product, Smartphone, LawnGrass
+
 
 @pytest.fixture()
 def category():
@@ -10,8 +11,8 @@ def category():
 def test_category(category):
     assert category.name == 'электроника'
     assert category.descriptions == 'описание'
-    assert category.total_number_of_categories == 2
-    assert category.total_number_of_unique_products == 6
+    assert category.total_number_of_categories == 1
+    assert category.total_number_of_unique_products == 4
 
 
 @pytest.fixture()
@@ -44,4 +45,36 @@ def test_str(prod1):
 
 def test_add(prod1, prod2):
     assert prod1 + prod2 == 1374000.0
+
+
+@pytest.fixture()
+def prod3():
+    return Smartphone('Iphone', 'описание', 65000.00, 13, 'Black',
+                      '8Gb', '13 pro', '256Gb')
+
+def test_prod3(prod3):
+    assert prod3.name == 'Iphone'
+    assert prod3.descriptions == 'описание'
+    assert prod3.price == 65000
+    assert prod3.quantity_stock == 13
+    assert prod3.color == 'Black'
+    assert prod3.performance == '8Gb'
+    assert prod3.model == '13 pro'
+    assert prod3.memory_capacity == '256Gb'
+
+@pytest.fixture()
+def prod4():
+    return LawnGrass('Газон', 'описание', 2000, 43, 'green',
+                     'Holland','14 суток')
+
+def test_prod4(prod4):
+    assert prod4.name == 'Газон'
+    assert prod4.descriptions == 'описание'
+    assert prod4.price == 2000
+    assert prod4.quantity_stock == 43
+    assert prod4.color == 'green'
+    assert prod4.manuf_country == 'Holland'
+    assert prod4.germination_period == '14 суток'
+
+
 
