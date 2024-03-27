@@ -7,7 +7,7 @@ class Category:
         self.descriptions = description # описание категории
         self.__products = products  # список продуктов
         Category.total_number_of_categories += 1  # общее количество категорий
-        Category.total_number_of_unique_products += len(self.__products)
+        Category.total_number_of_unique_products += len(self.__products) # количество уникальных продуктов
 
     def add_products(self, *args):
         self.__products.append(args)
@@ -31,12 +31,12 @@ class Category:
 
 
 class Product:
-    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int):
+    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color=None):
         self.name = name
         self.descriptions = descriptions
         self.price = price
         self.quantity_stock = quantity_stock
-
+        self.color = color
 
     @classmethod
     def products(cls, **obj):
@@ -58,8 +58,29 @@ class Product:
         return f'{self.name}, {self.price} руб. Остаток: {self.quantity_stock} шт.'
 
     def __add__(self, other):
-        result = (self.price * self.quantity_stock) + (other.price * other.quantity_stock)
-        return result
+        if type(self) == type(other):
+            result = (self.price * self.quantity_stock) + (other.price * other.quantity_stock)
+            return result
+        else:
+            raise TypeError('Продукт не соответствует типу')
+
+
+class Smartphone(Product):
+    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color, performance, model, memory_capacity):
+        super().__init__(name, descriptions, price, quantity_stock, color)
+        self.performance = performance
+        self.model = model
+        self.memory_capacity = memory_capacity
+
+
+class LawnGrass(Product):
+    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color, manufacturer_country, germination_period):
+        super().__init__(name, descriptions, price, quantity_stock, color)
+        self.manufacturer_country = manufacturer_country
+        self.germination_period = germination_period
+
+
+
 
 
 
