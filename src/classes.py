@@ -42,8 +42,8 @@ class Product:
 
     @classmethod
     def products(cls, **obj):
-        name, price, quantity_stock = obj
-        return cls(name, price, quantity_stock)
+        name,descriptions, price, quantity_stock, color = obj
+        return cls(name,descriptions, price, quantity_stock, color)
 
 
     @property

@@ -76,6 +76,10 @@ def test_prod4(prod4):
     assert prod4.manuf_country == 'Holland'
     assert prod4.germination_period == '14 суток'
 
+def test_add_fails_without_info(prod2, prod3):
+    with pytest.raises(TypeError):
+        assert prod2 + prod3
+
 
 
 
