@@ -43,7 +43,8 @@ class Commodity(ABC):
 
 class MixinLog:
     def __repr__(self):
-        print(f'Создан объект {self.__class__.__name__},{self.__str__()}')
+        products = [f'{i}:{j}' for i,j in self.__dict__.items()]
+        return f'Создан объект {self.__class__.__name__},{', '.join(products)}'
 
 
 
@@ -74,7 +75,7 @@ class Product(Commodity, MixinLog):
         self.price = price
 
     def __str__(self):
-        return f'{self.name}, {self.price},{self.descriptions}, {self.quantity_stock} ,{self.color}.'
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity_stock} шт.'
 
     def __add__(self, other):
         if type(self) == type(other):
@@ -91,6 +92,14 @@ class Smartphone(Product, MixinLog):
         self.performance = performance
         self.model = model
         self.memory_capacity = memory_capacity
+        super().__repr__()
+
+    @classmethod
+    def products(cls, **obj):
+        name, descriptions, price, quantity_stock, color, performance, model, memory_capacity = obj
+        return cls(name, descriptions, price, quantity_stock, color, performance, model, memory_capacity)
+
+
 
 
 
@@ -100,4 +109,10 @@ class LawnGrass(Product, MixinLog):
         super().__init__(name, descriptions, price, quantity_stock, color)
         self.manuf_country = manuf_country
         self.germination_period = germination_period
+        super().__repr__()
+
+    @classmethod
+    def products(cls, **obj):
+        name, descriptions, price, quantity_stock, color, manuf_country, germination_period = obj
+        return cls(name, descriptions, price, quantity_stock, color, manuf_country, germination_period)
 
