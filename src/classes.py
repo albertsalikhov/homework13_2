@@ -47,25 +47,25 @@ class Commodity(ABC):
 
 class MixinLog:
     def __repr__(self):
-        products = [f'{i}:{j}' for i,j in self.__dict__.items()]
+        products = [f'{j}' for i,j in self.__dict__.items()]
         return f'Создан объект {self.__class__.__name__},{', '.join(products)}'
 
 
 
 
 class Product(Commodity, MixinLog):
-    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color=None):
+    def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int):
         self.name = name
         self.descriptions = descriptions
         self.price = price
         self.quantity_stock = quantity_stock
-        self.color = color
+        # self.color = color
         super().__repr__()
 
     @classmethod
     def products(cls, **obj):
-        name,descriptions, price, quantity_stock, color = obj
-        return cls(name,descriptions, price, quantity_stock, color)
+        name,descriptions, price, quantity_stock = obj
+        return cls(name,descriptions, price, quantity_stock)
 
 
     @property
@@ -92,7 +92,8 @@ class Product(Commodity, MixinLog):
 class Smartphone(Product, MixinLog):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
                  model:str,memory_capacity:str):
-        super().__init__(name, descriptions, price, quantity_stock, color)
+        super().__init__(name, descriptions, price, quantity_stock)
+        self.color = color
         self.performance = performance
         self.model = model
         self.memory_capacity = memory_capacity
@@ -110,7 +111,8 @@ class Smartphone(Product, MixinLog):
 class LawnGrass(Product, MixinLog):
     def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color:str, manuf_country:str,
                  germination_period:str):
-        super().__init__(name, descriptions, price, quantity_stock, color)
+        super().__init__(name, descriptions, price, quantity_stock)
+        self.color = color
         self.manuf_country = manuf_country
         self.germination_period = germination_period
         super().__repr__()
