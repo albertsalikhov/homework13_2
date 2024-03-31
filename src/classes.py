@@ -40,6 +40,10 @@ class Commodity(ABC):
     def __init__(self):
         pass
 
+    @abstractmethod
+    def products(self):
+        pass
+
 
 class MixinLog:
     def __repr__(self):
