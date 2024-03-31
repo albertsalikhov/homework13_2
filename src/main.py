@@ -11,9 +11,9 @@ print(category1.product)
 print(Category.total_number_of_categories)
 print(product3)
 print(category1)
-print(product3 + product2)
-print(len(category1))
-print(category1.descriptions)
+# print(product3 + product2)
+# print(len(category1))
+# print(category1.descriptions)
 
 
 

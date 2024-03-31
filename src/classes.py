@@ -1,3 +1,6 @@
+from abc import ABC, abstractmethod
+
+
 class Category:
     total_number_of_categories = 0
     total_number_of_unique_products = 0
@@ -32,13 +35,27 @@ class Category:
         return f'{self.name}, количество продуктов: {len(self)} шт.'
 
 
-class Product:
+class Commodity(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
+
+
+class MixinLog:
+    def __repr__(self):
+        print(f'Создан объект {self.__class__.__name__},{self.__str__()}')
+
+
+
+
+class Product(Commodity, MixinLog):
     def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color=None):
         self.name = name
         self.descriptions = descriptions
         self.price = price
         self.quantity_stock = quantity_stock
         self.color = color
+        super().__repr__()
 
     @classmethod
     def products(cls, **obj):
@@ -57,7 +74,7 @@ class Product:
         self.price = price
 
     def __str__(self):
-        return f'{self.name}, {self.price} руб. Остаток: {self.quantity_stock} шт.'
+        return f'{self.name}, {self.price},{self.descriptions}, {self.quantity_stock} ,{self.color}.'
 
     def __add__(self, other):
         if type(self) == type(other):
@@ -67,7 +84,7 @@ class Product:
             raise TypeError('Продукт не соответствует типу')
 
 
-class Smartphone(Product):
+class Smartphone(Product, MixinLog):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
                  model:str,memory_capacity:str):
         super().__init__(name, descriptions, price, quantity_stock, color)
@@ -76,20 +93,11 @@ class Smartphone(Product):
         self.memory_capacity = memory_capacity
 
 
-class LawnGrass(Product):
+
+class LawnGrass(Product, MixinLog):
     def __init__(self, name:str, descriptions:str, price:float, quantity_stock:int, color:str, manuf_country:str,
                  germination_period:str):
         super().__init__(name, descriptions, price, quantity_stock, color)
         self.manuf_country = manuf_country
         self.germination_period = germination_period
-
-
-
-
-
-
-
-
-
-
 
