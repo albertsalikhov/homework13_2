@@ -44,13 +44,13 @@ class Commodity(ABC):
         pass
 
 
-class MixinLog:
+class MixinRepr:
     def __repr__(self):
         products = [f'{i}' for i in self.__dict__.values()]
         return f'Создан объект {self.__class__.__name__},{', '.join(products)}'
 
 
-class Product(Commodity, MixinLog):
+class Product(Commodity, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int):
         self.name = name
         self.descriptions = descriptions
@@ -83,7 +83,7 @@ class Product(Commodity, MixinLog):
             raise TypeError('Продукт не соответствует типу')
 
 
-class Smartphone(Product, MixinLog):
+class Smartphone(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
                  model: str, memory_capacity: str):
         super().__init__(name, descriptions, price, quantity_stock)
@@ -98,7 +98,7 @@ class Smartphone(Product, MixinLog):
         return cls(name, descriptions, price, quantity_stock, color, performance, model, memory_capacity)
 
 
-class LawnGrass(Product, MixinLog):
+class LawnGrass(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, manuf_country: str,
                  germination_period: str):
         super().__init__(name, descriptions, price, quantity_stock)
