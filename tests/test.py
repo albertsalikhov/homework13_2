@@ -40,7 +40,8 @@ def test_prod_2(prod2):
 
 
 def test_str(prod1):
-    assert f'{prod1.name}, {prod1.price} руб. Остаток: {prod1.quantity_stock} шт.' == 'ноутбук, 25000.0 руб. Остаток: 15 шт.'
+    assert (f'{prod1.name}, {prod1.price} руб. Остаток: {prod1.quantity_stock} шт.' ==
+            'ноутбук, 25000.0 руб. Остаток: 15 шт.')
 
 
 def test_add(prod1, prod2):
@@ -52,6 +53,7 @@ def prod3():
     return Smartphone('Iphone', 'описание', 65000.00, 13, 'Black',
                       '8Gb', '13 pro', '256Gb')
 
+
 def test_prod3(prod3):
     assert prod3.name == 'Iphone'
     assert prod3.descriptions == 'описание'
@@ -62,10 +64,12 @@ def test_prod3(prod3):
     assert prod3.model == '13 pro'
     assert prod3.memory_capacity == '256Gb'
 
+
 @pytest.fixture()
 def prod4():
     return LawnGrass('Газон', 'описание', 2000, 43, 'green',
-                     'Holland','14 суток')
+                     'Holland', '14 суток')
+
 
 def test_prod4(prod4):
     assert prod4.name == 'Газон'
@@ -76,10 +80,7 @@ def test_prod4(prod4):
     assert prod4.manuf_country == 'Holland'
     assert prod4.germination_period == '14 суток'
 
+
 def test_add_fails_without_info(prod2, prod3):
     with pytest.raises(TypeError):
         assert prod2 + prod3
-
-
-
-
