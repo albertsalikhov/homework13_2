@@ -35,16 +35,16 @@ class Category:
 
 
 class Commodity(ABC):
-    @abstractmethod
-    def __init__(self):
-        pass
 
     @abstractmethod
-    def products(self):
+    def products(self, **obj):
         pass
 
 
 class MixinRepr:
+    def __init__(self, *args):
+        print(repr(self))
+
     def __repr__(self):
         products = [f'{i}' for i in self.__dict__.values()]
         return f'Создан объект {self.__class__.__name__},{', '.join(products)}'
@@ -56,6 +56,7 @@ class Product(Commodity, MixinRepr):
         self.descriptions = descriptions
         self.price = price
         self.quantity_stock = quantity_stock
+        MixinRepr.__init__(self)
 
     @classmethod
     def products(cls, **obj):
@@ -86,11 +87,12 @@ class Product(Commodity, MixinRepr):
 class Smartphone(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
                  model: str, memory_capacity: str):
-        super().__init__(name, descriptions, price, quantity_stock)
+        # super().__init__(name, descriptions, price, quantity_stock)
         self.color = color
         self.performance = performance
         self.model = model
         self.memory_capacity = memory_capacity
+        super().__init__(name, descriptions, price, quantity_stock)
 
     @classmethod
     def products(cls, **obj):
@@ -101,10 +103,11 @@ class Smartphone(Product, MixinRepr):
 class LawnGrass(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, manuf_country: str,
                  germination_period: str):
-        super().__init__(name, descriptions, price, quantity_stock)
+        # super().__init__(name, descriptions, price, quantity_stock)
         self.color = color
         self.manuf_country = manuf_country
         self.germination_period = germination_period
+        super().__init__(name, descriptions, price, quantity_stock)
 
     @classmethod
     def products(cls, **obj):
