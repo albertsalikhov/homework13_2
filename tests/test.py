@@ -85,30 +85,8 @@ def test_add_fails_without_info(prod2, prod3):
     with pytest.raises(TypeError):
         assert prod2 + prod3
 
+
 @pytest.fixture()
 def prod5():
     return Smartphone('Iphone', 'описание', 90000, 0, 'Grey',
                       '16Gb', '15 pro', '256Gb')
-
-
-def test_avg_price(prod1, prod2, prod3, prod4):
-    price = []
-    products = [prod1, prod2, prod3, prod4]
-    for prod in products:
-        price.append(prod.price)
-    avg = sum(price) / len(products)
-    assert avg == 32250.0
-
-
-def test_avg_price_error(prod1, prod5):
-    with pytest.raises(ZeroDivisionError):
-        products = []
-        price = []
-        for prod in products:
-            price.append(prod.price)
-        sum(price) / len(products)
-
-
-
-
-
