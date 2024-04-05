@@ -12,10 +12,12 @@ class Category:
         Category.total_number_of_categories += 1  # общее количество категорий
         Category.total_number_of_unique_products += len(self.__products)  # количество уникальных продуктов
 
-    def add_products(self, *args):
-        if isinstance(args, Product):
-            self.__products.append(args)
-        raise TypeError('Только Product и наследники Product')
+    def add_products(self, product):
+        if not isinstance(product, Product):
+            raise TypeError('Только Product и наследники Product')
+        if not product.quantity_stock > 0:
+            raise ValueError('Товар с нулевым количеством не может быть добавлен')
+        self.__products.append(product)
 
     @property
     def product(self):
@@ -32,6 +34,17 @@ class Category:
 
     def __str__(self):
         return f'{self.name}, количество продуктов: {len(self)} шт.'
+
+    def avg_price(self):
+        price = []
+        for prod in self.__products:
+            price.append(prod.price)
+        try:
+            avg = sum(price) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
+        else:
+            return avg
 
 
 class Commodity(ABC):
@@ -87,7 +100,6 @@ class Product(Commodity, MixinRepr):
 class Smartphone(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, performance: str,
                  model: str, memory_capacity: str):
-        # super().__init__(name, descriptions, price, quantity_stock)
         self.color = color
         self.performance = performance
         self.model = model
@@ -103,7 +115,6 @@ class Smartphone(Product, MixinRepr):
 class LawnGrass(Product, MixinRepr):
     def __init__(self, name: str, descriptions: str, price: float, quantity_stock: int, color: str, manuf_country: str,
                  germination_period: str):
-        # super().__init__(name, descriptions, price, quantity_stock)
         self.color = color
         self.manuf_country = manuf_country
         self.germination_period = germination_period
