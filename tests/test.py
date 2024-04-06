@@ -90,3 +90,14 @@ def test_add_fails_without_info(prod2, prod3):
 def prod5():
     return Smartphone('Iphone', 'описание', 90000, 0, 'Grey',
                       '16Gb', '15 pro', '256Gb')
+
+
+def test_prod5(prod5):
+    assert prod5.name == 'Iphone'
+    assert prod5.descriptions == 'описание'
+    assert prod5.price == 90000
+    assert prod5.quantity_stock == 0
+    assert prod5.color == 'Grey'
+    assert prod5.performance == '16Gb'
+    assert prod5.model == '15 pro'
+    assert prod5.memory_capacity == '256Gb'

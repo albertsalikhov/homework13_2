@@ -10,7 +10,7 @@ class Category:
         self.descriptions = description  # описание категории
         self.__products = products  # список продуктов
         Category.total_number_of_categories += 1  # общее количество категорий
-        Category.total_number_of_unique_products += len(self.__products)  # количество уникальных продуктов
+        Category.total_number_of_unique_products += len(set(self.__products))  # количество уникальных продуктов
 
     def add_products(self, product):
         if not isinstance(product, Product):
