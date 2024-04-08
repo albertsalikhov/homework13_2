@@ -15,7 +15,7 @@ class Category:
     def add_products(self, product):
         if not isinstance(product, Product):
             raise TypeError('Только Product и наследники Product')
-        if not product.quantity_stock > 0:
+        if product.quantity_stock <= 0:
             raise ValueError('Товар с нулевым количеством не может быть добавлен')
         self.__products.append(product)
 

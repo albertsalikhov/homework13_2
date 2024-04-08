@@ -13,12 +13,6 @@ category = Category('электроника', 'описание', list_products)
 category.add_products(product5)
 print(category.product)
 print(category.avg_price())
-
-
-# print(product1.__repr__())
-# print(product2.__repr__())
-# print(product3.__repr__())
-# print(product4.__repr__())
 # print(LawnGrass.__mro__)
 # print(list_products)
 # print(category1.product)
