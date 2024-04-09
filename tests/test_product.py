@@ -10,11 +10,17 @@ def category():
                                                 65000.00, 13, 'Black', '8Gb', '13 pro', '256Gb')])
 
 
-def test_category(category):
+@pytest.fixture()
+def category2():
+    return Category('электроника', 'описание', [('Газон', 'описание', 2000.00, 43, 'green',
+                    'Holland', '14 суток'),('Iphone', 'описание', 90000, 0, 'Grey', '16Gb', '15 pro', '256Gb')])
+
+
+def test_category(category, category2):
     assert category.name == 'электроника'
     assert category.descriptions == 'описание'
-    assert category.total_number_of_categories == 1
-    assert category.total_number_of_unique_products == 3
+    assert category.total_number_of_categories == 2
+    assert category.total_number_of_unique_products == 5
 
 
 @pytest.fixture()
