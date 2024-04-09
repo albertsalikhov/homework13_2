@@ -5,14 +5,16 @@ from pythonProject.src.classes import Category, Product, Smartphone, LawnGrass
 
 @pytest.fixture()
 def category():
-    return Category('электроника', 'описание', ['ноутбук', 'описание', 25000.00, 15])
+    return Category('электроника', 'описание', [('ноутбук', 'описание', 25000.00, 15),
+                                                ('телевизор', 'описание', 50000.00, 10), ('Iphone', 'описание ',
+                                                65000.00, 13, 'Black', '8Gb', '13 pro', '256Gb')])
 
 
 def test_category(category):
     assert category.name == 'электроника'
     assert category.descriptions == 'описание'
     assert category.total_number_of_categories == 1
-    assert category.total_number_of_unique_products == 4
+    assert category.total_number_of_unique_products == 3
 
 
 @pytest.fixture()
