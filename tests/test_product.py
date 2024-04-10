@@ -1,6 +1,6 @@
 import pytest
 
-from pythonProject.src.classes import Category, Product, Smartphone, LawnGrass
+from src.classes import Category, Product, Smartphone, LawnGrass
 
 
 @pytest.fixture()
